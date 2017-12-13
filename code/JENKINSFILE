@@ -1,0 +1,39 @@
+pipeline { // Top level required.
+	agent { // Specifies where the the pipeline will execute.
+		docker { // Execute the pipeline within a docker image
+			image 'ortussolutions/commandbox'  // Image for docker 
+		}
+	}
+
+	stages { // Bulk of the work happens here. Is made up of multiple stage children. Does them in order
+		stage('Build') {//Different steps in the stages section
+			steps { //Here is the actions that occur in the stage
+				echo 'Building..' //simply output the string
+				sh 'box install commandbox-cfconfig'
+				sh 'box server start port=8080'
+				sh 'box cfconfig import myConfig.json'
+				sh 'box cfconfig import testConfig.json'
+				sh 'box install'
+				sh 'box server restart'
+
+			}
+		}
+		stage('Test') { //Testing stage. This does not run if previous stages have failed.
+			steps {
+				echo 'Testing..'
+				sh 'box testbox run runner="http://localhost:8080/tests/index.cfm" reporter="JUnit" directory="tests.specs" outputFile="./junitResults.xml"'
+			}
+		}
+		stage('Deploy') { //Currently empty but we could put some deployment logic here.
+			steps {
+				echo 'Deploying....'
+			}
+		}
+	}
+	post { // This always occurs even if something failed. 
+		always {
+			archive "src/**/*"
+			junit 'junitResults.xml'
+		}
+	}
+}
