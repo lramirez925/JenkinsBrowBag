@@ -1,3 +1,2 @@
 FROM ortussolutions/commandbox
-ENTRYPOINT [ "box" ]
-CMD []
+CMD ["box"]
