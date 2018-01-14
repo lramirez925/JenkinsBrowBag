@@ -1,2 +1,2 @@
-from ortussolutions/commandbox
+FROM ortussolutions/commandbox
 ENTRYPOINT [ "/bin/bash" ]
