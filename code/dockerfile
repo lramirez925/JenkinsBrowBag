@@ -1,2 +1,2 @@
 FROM ortussolutions/commandbox
-ENTRYPOINT [ "/bin/bash" ]
+CMD []
