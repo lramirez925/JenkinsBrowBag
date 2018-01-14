@@ -1,2 +1,3 @@
 FROM ortussolutions/commandbox
+ENTRYPOINT [ "box" ]
 CMD []
