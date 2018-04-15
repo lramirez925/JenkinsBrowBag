@@ -13,6 +13,6 @@ component {
 
     public numeric function subtract(required numeric v) {
         variables.value -= v;
-        return variables.value;s
+        return variables.value;
     }
 }
