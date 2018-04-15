@@ -1,9 +1,9 @@
 pipeline { // Top level required.
 	agent { // Specifies where the the pipeline will execute.
-		dockerfile {
-			filename 'dockerfile'
-			dir './code'
-    	}
+		docker {
+			image 'ortussolutions/commandbox'
+			args '--user= root'
+		}
 	}
 
 	stages { // Bulk of the work happens here. Is made up of multiple stage children. Does them in order
