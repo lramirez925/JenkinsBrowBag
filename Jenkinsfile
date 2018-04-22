@@ -10,7 +10,9 @@ pipeline {
     stage('Build') {
       steps {
         sh 'echo \'In Build Step\''
+        sh 'ls'
         sh 'cd code'
+        sh 'ls'
         sh 'pwd'
         sh 'box version'
       }
