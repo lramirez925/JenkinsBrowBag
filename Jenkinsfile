@@ -1,5 +1,11 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'ortussolutions/commandbox'
+      args '-u root'
+    }
+
+  }
   stages {
     stage('Build') {
       steps {
